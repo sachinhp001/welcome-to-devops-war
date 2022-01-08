@@ -15,7 +15,7 @@ pipeline {
                   sh 'pwd'
                 sh 'ls'
             
-                sh 'docker build -t tomcat:ver1.1 .'  
+                sh 'docker build -t tomcat:1.0.'  
                 }
               
                 
@@ -24,7 +24,7 @@ pipeline {
 	 stage('deploy'){
 	     steps{
 	        sh 'docker rm -f mytomcat'
-	         sh 'docker run -d --name mytomcat -p 7777:8080 tomcat:ver1.1'
+	         sh 'docker run -d --name mytomcat -p 8888:8080 tomcat:ver1.1'
 	     }
 	 }
     }
