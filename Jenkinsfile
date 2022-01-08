@@ -15,7 +15,7 @@ pipeline {
                   sh 'pwd'
                 sh 'ls'
             
-                sh 'docker build -t tomcat:1.0.'  
+                sh 'docker build -t tomcat:1.0 .'  
                 }
               
                 
