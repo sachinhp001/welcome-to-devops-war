@@ -1,17 +1,17 @@
 pipeline {
-	agent { label 'tom' }
+	agent { label 'slave' }
     stages {
 	    
        stage('checkout') {
             steps {
-                sh 'sudo rm -rf hello-world-war'
+                sh 'sudo rm -rf welcome-to-devops-war'
 	sh 'git clone https://github.com/akshayvdes/hello-world-war.git'	
               }
         }
 	 stage('build') {
 	
             steps {
-                dir('hello-world-war'){
+                dir('welcome-to-devops-war'){
                   sh 'pwd'
                 sh 'ls'
             
