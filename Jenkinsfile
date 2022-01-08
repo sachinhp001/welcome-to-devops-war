@@ -5,7 +5,7 @@ pipeline {
        stage('checkout') {
             steps {
                 sh 'sudo rm -rf welcome-to-devops-war'
-	sh 'git clone https://github.com/akshayvdes/hello-world-war.git'	
+	sh 'git clone https://github.com/manojugowda/welcome-to-devops-war'	
               }
         }
 	 stage('build') {
