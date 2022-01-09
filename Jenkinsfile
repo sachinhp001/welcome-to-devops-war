@@ -1,14 +1,14 @@
 pipeline {
-	agent { label 'slave' }
+	agent { label 'slave-1' }
 environment {
-		DOCKERHUB_CREDENTIALS=credentials('dockerhub_id')
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub_slave-1')
 	}
     stages {
 	    
        stage('checkout') {
             steps {
                 sh 'sudo rm -rf welcome-to-devops-war'
-	sh 'git clone https://github.com/manojugowda/welcome-to-devops-war'	
+	sh 'git clone https://github.com/akshayvdes/welcome-to-devops-war.git'	
               }
         }
 	 stage('build') {
@@ -36,8 +36,8 @@ environment {
 	stage('Push') {
 
 			steps {
-			    sh 'docker tag tomcat:1.0 manojdevops28/tomcatnew:1.3'
-				sh 'docker push manojdevops28/tomcatnew:1.3'
+			    sh 'docker tag tomcat:1.0 akshayvdes/tomcatnew_ak:1.3'
+				sh 'docker push akshayvdes/tomcatnew_ak:1.3'
 			}
 		}
     }
