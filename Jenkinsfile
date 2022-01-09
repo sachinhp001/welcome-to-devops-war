@@ -1,19 +1,19 @@
 pipeline {
 	agent none
 environment {
-		DOCKERHUB_CREDENTIALS=credentials('dockerhub_slave-1')
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub_slave')
 	}
     stages {
 	
        stage('checkout') {
-    agent  { label 'tom' }
+    agent  { label 'java' }
             steps {
                 sh 'sudo rm -rf welcome-to-devops-war'
-	sh 'git clone https://github.com/akshayvdes/welcome-to-devops-war.git'	
+	sh 'git clone https://github.com/sachinhp001/welcome-to-devops-war.git'	
               }
         }
 	 stage('build') {
- agent  { label 'tom' }
+ agent  { label 'java' }
 	steps {
  
                 dir('welcome-to-devops-war'){
@@ -25,32 +25,32 @@ environment {
             }
 	 }
 	 stage('deploy'){
- agent  { label 'tom' }
+ agent  { label 'java' }
 	     steps{
 	        sh 'docker rm -f mytomcat'
 	         sh 'docker run -d --name mytomcat -p 8888:8080 tomcat:1.0'
 	     }
 	 }
 		stage('Login') {
-agent  { label 'tom' }
+agent  { label 'java' }
 			steps {
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 			}
 		}
 	stage('Push') {
- agent  { label 'tom' }
+ agent  { label 'java' }
 
 			steps {
-			    sh 'docker tag tomcat:1.0 akshayvdes/tomcatnew_ak:1.3'
-				sh 'docker push akshayvdes/tomcatnew_ak:1.3'
+			    sh 'docker tag tomcat:1.0 sachinhp001/jenkins_sa:1.3'
+				sh 'docker push sachinhp001/jenkins_sa:1.3'
 			}
 		}
 
     stage('pull image'){
-    agent { label 'deplo' }
+    agent { label 'jen' }
         steps{
             sh 'docker rm -f mytomcat'
-            sh 'docker run -d --name mytomcat -p 7100:8080 akshayvdes/tomcatnew_ak:1.3'
+            sh 'docker run -d --name mytomcat -p 7100:8080 sachinhp001/jenkins_sa:1.3'
         }
     }
     }
